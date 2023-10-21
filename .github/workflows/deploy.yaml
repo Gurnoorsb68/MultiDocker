@@ -1,0 +1,28 @@
+name: CI MultipleImages
+  on:
+    push:
+      branch :
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps : 
+      - uses: actions/checkout@v3
+      - run: docker login -u ${{sercrets.DOCKER_USERNAME}} -p ${{sercrets.DOCKER_PASSWORD}}
+      - run: doceker build -t gurnoorsb/docker-multi-container -f ./client/Dockerfile.dev ./client
+      - run: docker run -e CI=true gurnoorsb/docker-multi-container npm test
+
+      - run: docker build -t gurnoorsb/multi-client ./client
+      - run: docker build -t gunroorsb/multi-server ./server
+      - run: docker build -t gurnoorsb/multi-nginx ./nginx
+      - run: docker build -t gurnoorsb/multi-worker ./worker
+
+      - run: docker push gurnoorsb/multi-client
+      - run: docker push gunroorsb/multi-server
+      - run: docker push gurnoorsb/multi-nginx 
+      - run: docker push gurnoorsb/multi-worker 
+
+
+
+
