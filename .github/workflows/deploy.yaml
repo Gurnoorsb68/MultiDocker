@@ -13,15 +13,31 @@ jobs:
       - run: doceker build -t gurnoorsb/docker-multi-container -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true gurnoorsb/docker-multi-container npm test
 
-      - run: docker build -t gurnoorsb/multi-client ./client
+      - run: docker build -t gurnoorsb/multi-client ./client  #images build @github actions
       - run: docker build -t gunroorsb/multi-server ./server
       - run: docker build -t gurnoorsb/multi-nginx ./nginx
       - run: docker build -t gurnoorsb/multi-worker ./worker
 
-      - run: docker push gurnoorsb/multi-client
+      - run: docker push gurnoorsb/multi-client #images pushed to docker hub
       - run: docker push gunroorsb/multi-server
       - run: docker push gurnoorsb/multi-nginx 
       - run: docker push gurnoorsb/multi-worker 
+
+       
+    #  - name: Generate deployment package
+    #   run: zip -r deploy.zip . -x '*.git*'
+    #  
+    #  - name: Deploy to EB
+    #    uses: einaregilsson/beanstalk-deploy@v18
+    #    with:
+    #      aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+    #      aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+    #      application_name: docker_guide_aws
+    #      environment_name: Dockerguideaws-env
+    #      region: us-east-1
+    #      existing_bucket_name: elasticbeanstalk-us-east-1-828961408305
+    #      version_label: ${{ github.sha }}
+    #      deployment_package: deploy.zip
 
 
 
