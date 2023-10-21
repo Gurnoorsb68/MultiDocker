@@ -14,12 +14,12 @@ jobs:
       - run: docker run -e CI=true gurnoorsb/docker-multi-container npm test
 
       - run: docker build -t gurnoorsb/multi-client ./client  #images build @github actions
-      - run: docker build -t gunroorsb/multi-server ./server
+      - run: docker build -t gurnoorsb/multi-server ./server
       - run: docker build -t gurnoorsb/multi-nginx ./nginx
       - run: docker build -t gurnoorsb/multi-worker ./worker
 
       - run: docker push gurnoorsb/multi-client #images pushed to docker hub
-      - run: docker push gunroorsb/multi-server
+      - run: docker push gurnoorsb/multi-server
       - run: docker push gurnoorsb/multi-nginx 
       - run: docker push gurnoorsb/multi-worker 
 
