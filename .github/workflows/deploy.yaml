@@ -1,7 +1,7 @@
 name: CI MultipleImages
-  on:
-    push:
-      branch :
+on:
+  push:
+    branches :
       - main
 
 jobs:
