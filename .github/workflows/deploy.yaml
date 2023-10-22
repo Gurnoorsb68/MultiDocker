@@ -15,14 +15,18 @@ jobs:
           ./client
       - run: docker run -e CI=true gurnoorsb/docker-multi-container npm test
       - run: docker build -t gurnoorsb/multi-client ./client
+      - run: docker build -t gurnoorsb/multi-server ./server
       - run: docker build -t gurnoorsb/multi-nginx ./nginx
       - run: docker build -t gurnoorsb/multi-worker ./worker
+      
       - run: docker push gurnoorsb/multi-client
       - run: docker push gurnoorsb/multi-server
       - run: docker push gurnoorsb/multi-nginx
       - run: docker push gurnoorsb/multi-worker
+      
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
+      
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v18
         with:
