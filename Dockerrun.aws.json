@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion":2,
+    "containerDefinations": [
+        {
+            "name": "client",
+            "image": "gurnoorsb/multi-client",
+            "hostname": "client",
+            "essential":false
+            
+        },
+        {
+            "name": "server",
+            "image": "gurnoorsb/multi-server",
+            "hostname": "api",
+            "essential":false
+        },
+        {
+            "name": "worker",
+            "image": "gurnoorsb/multi-worker",
+            "hostname":"worker",
+            "essential":false
+        },
+        {
+            "name": "nginx",
+            "image": "gurnoorsb/multi-nginx",
+            "hostname": "nginx",
+            "essential":true,
+            "portMappings": [
+                {
+                    "hostPort" : 80,
+                    "containerPort" : 80
+                }
+            ],
+            "links": ["client","server"]
+        }
+    ]
+}
