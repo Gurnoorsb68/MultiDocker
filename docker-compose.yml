@@ -1,11 +1,11 @@
-version: "3"
+version: '3'
 services:
   client:
-    image: "gurnoorsb/multi-client"
+    image: 'rallycoding/multi-client'
     mem_limit: 128m
     hostname: client
   server:
-    image: "gurnoorsb/multi-server"
+    image: 'rallycoding/multi-server'
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,15 +17,15 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "gurnoorsb/multi-worker"
+    image: 'rallycoding/multi-worker'
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "gurnoorsb/multi-nginx"
+    image: 'rallycoding/multi-nginx'
     mem_limit: 128m
     hostname: nginx
     ports:
-      - "80:80"
+      - '80:80'
