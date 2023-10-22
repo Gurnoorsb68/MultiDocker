@@ -24,7 +24,7 @@ services:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "cygnetops/multi-nginx-10-14"
+    image: "gurnoorsb/multi-nginx"
     mem_limit: 128m
     hostname: nginx
     ports:
