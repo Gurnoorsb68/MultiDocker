@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v3
       - run: docker login -u ${{secrets.DOCKER_USERNAME}} -p
           ${{secrets.DOCKER_PASSWORD}}
-      - run: docker build -t gurnoorsb/docker-multi-container -f ./client/Dockerfile.dev
-          ./client
+      - run: docker build -t gurnoorsb/docker-multi-container -f ./client/Dockerfile.dev  
+          ./client    # build for test on dev
       - run: docker run -e CI=true gurnoorsb/docker-multi-container npm test
-      - run: docker build -t gurnoorsb/multi-client ./client
+      - run: docker build -t gurnoorsb/multi-client ./client  #build for production using Dockerfile in client
       - run: docker build -t gurnoorsb/multi-server ./server
       - run: docker build -t gurnoorsb/multi-nginx ./nginx
       - run: docker build -t gurnoorsb/multi-worker ./worker

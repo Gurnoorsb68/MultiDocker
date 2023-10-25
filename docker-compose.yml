@@ -16,6 +16,7 @@ services:
       - PGDATABASE=$PGDATABASE
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
+    network_mode: bridge
   worker:
     image: 'gurnoorsb/multi-worker'
     mem_limit: 128m
